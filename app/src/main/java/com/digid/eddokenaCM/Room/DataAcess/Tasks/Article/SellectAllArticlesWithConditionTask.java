@@ -25,7 +25,7 @@ public class SellectAllArticlesWithConditionTask extends AsyncTask<Void, Void, L
     private DealTargetFilter dealTargetFilter;
     private Long cat;
     private Long id; // kif kif catId
-    private Long catId; // kif kif id
+    private Long catId; // kif kif idJ
     private List<Long> list= new ArrayList<>();
     private Integer level;
     private String frag;
