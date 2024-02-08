@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:id="@+id/swipe_container"
+    tools:context="com.digid.eddokenaCM.Menu.Historique.HistoriqueCoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/h20Gl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <LinearLayout
+            android:id="@+id/imageView0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:background="#1a237e"
+            app:layout_constraintBottom_toTopOf="@+id/h20Gl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/hist_back_iv"
+            android:layout_width="70dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/iconback"
+            app:layout_constraintStart_toStartOf="@+id/imageView0"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            app:boxBackgroundColor="@color/white"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+
+
+            app:boxCornerRadiusBottomEnd="5dp"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+
+            app:startIconDrawable="@drawable/baseline_search_24"
+
+            app:layout_constraintBottom_toBottomOf="@+id/imageView0"
+            android:hint="Rechercher ..."
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView0">
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hist_search_sv"
+                android:inputType="text"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="192dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@drawable/diglogowhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView0">
+
+
+            <TextView
+                android:id="@+id/hist_lundi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_light"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Lundi"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"/>
+
+            <TextView
+                android:id="@+id/hist_mardi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_light"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Mardi"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/hist_mercredi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_light"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Mercredi"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"/>
+
+            <TextView
+                android:id="@+id/hist_jeudi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_light"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Jeudi"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"/>
+
+            <TextView
+                android:id="@+id/hist_vendredi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_light"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Vendredi"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"/>
+
+            <TextView
+                android:id="@+id/hist_samedi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_light"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Samedi"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"/>
+
+            <TextView
+                android:id="@+id/hist_dimanche_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_light"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Dimanche"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform" />
+
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hist_commande_rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/layout_shape"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            tools:listitem="@layout/itemhist" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/hist_navarticle_iv"
+                android:layout_width="110dp"
+                android:layout_height="55dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/shadow_rect2"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:srcCompat="@drawable/iconarticle" />
+
+            <ImageView
+                android:id="@+id/hist_navcommande_iv"
+                android:layout_width="125dp"
+                android:layout_height="55dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/shadow_rect2"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:srcCompat="@drawable/iconsshopp" />
+
+            <ImageView
+                android:id="@+id/hist_navclient_iv"
+                android:layout_width="110dp"
+                android:layout_height="55dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/shadow_rect2"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:srcCompat="@drawable/iconclient" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hist_afficheplus_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/textviewshape_3"
+            android:fontFamily="@font/muli_light"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="5dp"
+            android:text="Afficher plus ...."
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/hist_backup_iv"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/shadow_rect2"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/iconbackup"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

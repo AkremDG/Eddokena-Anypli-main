@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/drawable/ic_baseline_cloud_sync_24.xml" value="0.30234375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.21796875" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.21796875" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/drawable/login_button_shape.xml" value="0.21796875" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/drawable/login_layout_shape.xml" value="0.21796875" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/drawable/menu_button_shape.xml" value="0.21796875" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/activity_main.xml" value="0.1" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/authentification_error_dialog.xml" value="0.264" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/conditionnement_dialog.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/connection_error_dialog.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/dataload_dialog.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/dataload_error_dialog.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_article_co.xml" value="0.264" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_caisse_total.xml" value="0.1078125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_change_command.xml" value="0.136" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_client_co.xml" value="0.1078125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_client_lv.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_com_article.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_com_client.xml" value="0.19166666666666668" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_data_load.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_facture_livreee.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_facture_non_livreee.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_factures.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_historique_co.xml" value="0.1" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_login.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_menu_admin.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_menu_co.xml" value="0.264" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_panier.xml" value="0.19166666666666668" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/inscription_dialog.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemarticle.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemarticle_com.xml" value="0.1" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemcatalogue.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemclient.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemclientliv.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemclientsanspanier.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemcommand.xml" value="0.264" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemcommandesanscorb.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemconditionnement.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemfactlivree.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemfactnonlivree.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itemhist.xml" value="0.1" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/itempromo.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/ws_error_dialog.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/authentification_error_dialog.xml" value="0.536" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/conditionnement_dialog.xml" value="0.4" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/connection_error_dialog.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/dataload_dialog.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/dataload_error_dialog.xml" value="0.4" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_caisse_total.xml" value="0.176" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_change_command.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_client_co.xml" value="0.14703968770331816" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_com_article.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_historique_co.xml" value="0.1078125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_menu_co.xml" value="0.1840277777777778" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_panier.xml" value="0.1840277777777778" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_stat_par_article.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_stat_par_clients.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_statistic.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/inscription_dialog.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemarticle.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemarticle_com.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemcatalogue.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemclient.xml" value="0.19166666666666668" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemcommand.xml" value="0.19166666666666668" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemcommandesanscorb.xml" value="0.1840277777777778" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemconditionnement.xml" value="0.151953125" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/itemhist.xml" value="0.1840277777777778" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/promo_dialog.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/ws_error_dialog.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/authentification_error_dialog.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/conditionnement_dialog.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/connection_error_dialog.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/dataload_error_dialog.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/fragment_article_co.xml" value="0.9857142857142858" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/fragment_caisse_total.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/fragment_login.xml" value="0.996219281663516" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/fragment_menu_co.xml" value="2.6535714285714285" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/fragment_panier.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/inscription_dialog.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/ws_error_dialog.xml" value="1.8821428571428571" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/activity_main.xml" value="0.20347490347490346" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/fragment_change_command.xml" value="0.290234375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/fragment_login.xml" value="0.203515625" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/fragment_menu_co.xml" value="0.290234375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/fragment_menu_co_lv.xml" value="0.19166666666666668" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/fragment_panier.xml" value="0.290234375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/itemarticle_com.xml" value="0.1796875" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw240dp/itemcommand.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/fragment_article_co.xml" value="0.1796875" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/fragment_change_command.xml" value="0.290234375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/fragment_client_co.xml" value="0.1796875" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/fragment_login.xml" value="0.290234375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/fragment_menu_co.xml" value="0.290234375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/fragment_menu_co_lv.xml" value="0.264" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/fragment_panier.xml" value="0.536" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/itemarticle_com.xml" value="0.1796875" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout-sw600dp/itemcommand.xml" value="0.205859375" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout/fragment_change_command.xml" value="2.6535714285714285" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout/fragment_com_article.xml" value="1.6428571428571428" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout/fragment_panier.xml" value="2.6535714285714285" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout/itemarticle_com.xml" value="1.6428571428571428" />
+        <entry key="..\:/Desktop/Eddokena/V31/ClientMobile/app/src/main/res/layout/itemhist.xml" value="2.2785714285714285" />
+        <entry key="..\:/Users/charf/OneDrive/Bureau/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw240dp/fragment_client_co.xml" value="0.125390625" />
+        <entry key="..\:/Users/charf/OneDrive/Bureau/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout-sw600dp/fragment_client_co.xml" value="0.2" />
+        <entry key="..\:/Users/charf/OneDrive/Bureau/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/fragment_client_co.xml" value="0.38485804416403785" />
+        <entry key="..\:/Users/charf/OneDrive/Bureau/Eddokena/Mobile/VersionLocationOff/V2.9/ClientMobile/app/src/main/res/layout/fragment_stat_par_categorie.xml" value="0.8714285714285714" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

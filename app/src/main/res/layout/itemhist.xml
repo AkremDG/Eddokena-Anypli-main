@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/hist_linerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/histshape"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/facturevalidity_tv"
+            android:layout_width="2dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/hist_collnom_tv"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/textviewshape"
+            android:fontFamily="@font/muli_light"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Meher Toumi"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/hist_collcode_tv"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:background="@drawable/textviewshape"
+            android:fontFamily="@font/muli_light"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="CL001"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/hist_factcode_tv"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:background="@drawable/textviewshape"
+            android:fontFamily="@font/muli_light"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="BC19037"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/hist_factdate_tv"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:background="@drawable/textviewshape"
+            android:fontFamily="@font/muli_light"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="16/04/2019"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/hist_facttotal_tv"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/textviewshape"
+            android:fontFamily="@font/muli_light"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="80,300"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/hist_change_iv"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/iconinfo"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

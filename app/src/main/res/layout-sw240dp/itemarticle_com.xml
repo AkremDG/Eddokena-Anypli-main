@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:background="#FFF">
+
+    <LinearLayout
+        android:id="@+id/articocom_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:id="@+id/articledispo_tv"
+            android:layout_width="2dp"
+            android:layout_height="match_parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp">
+            <ImageView
+                android:id="@+id/articlecomimage_iv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="5dp"
+                app:srcCompat="@drawable/iconempty"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/articlediscount_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/promotion_circle_drawable"
+                android:padding="4dp"
+                android:text="50%"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/white"
+                android:visibility="invisible"
+                android:elevation="16dp"
+                app:layout_constraintStart_toStartOf="@id/articlecomimage_iv"
+                app:layout_constraintTop_toTopOf="@id/articlecomimage_iv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/articlecomname_tv"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:fontFamily="@font/muli_light"
+            android:layout_marginTop="4dp"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/black"/>
+
+
+        <EditText
+            android:id="@+id/articlecomqte_et"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/muli_light"
+            android:inputType="numberDecimal"
+            android:padding="5dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:imeOptions="actionDone|flagNoExtractUi"/>
+
+        <TextView
+            android:id="@+id/articlecomqte_tv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:padding="5dp"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/muli_light"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"/>
+
+        <TextView
+            android:id="@+id/articlecomcond_tv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_light"
+            android:padding="2dp"
+            android:layout_weight="0.5"
+            android:text="Choisir le Co°"
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/black"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/articlecomcondfix_tv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_light"
+            android:padding="2dp"
+            android:layout_weight="0.5"
+            android:text="Choisir le Co°"
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/articlecomprix_tv"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_light"
+            android:padding="2dp"
+            android:layout_weight="0.5"
+            android:text="0 TND"
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/articlecomtotal_tv"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_light"
+            android:padding="2dp"
+            android:layout_weight="0.5"
+            android:textStyle="bold"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/articlecomadd_bnt"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/iconpanier"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,214 @@
+{
+  "project_info": {
+    "project_number": "540861767553",
+    "firebase_url": "https://edokkena-84500.firebaseio.com",
+    "project_id": "edokkena-84500",
+    "storage_bucket": "edokkena-84500.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540861767553:android:7f8f1c8aea80495e225280",
+        "android_client_info": {
+          "package_name": "com.digid.eddokena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTEe8TR1fH2_t5Lec1SbldNkBk9FmG-Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540861767553:android:334ffce27e987101225280",
+        "android_client_info": {
+          "package_name": "com.digid.eddokenaCM"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTEe8TR1fH2_t5Lec1SbldNkBk9FmG-Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540861767553:android:c467a117bfcf49ef225280",
+        "android_client_info": {
+          "package_name": "com.digid.eddokenaCMag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTEe8TR1fH2_t5Lec1SbldNkBk9FmG-Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540861767553:android:ed3e56fcce4dfbca225280",
+        "android_client_info": {
+          "package_name": "com.digid.eddokenaCogecomGlobal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTEe8TR1fH2_t5Lec1SbldNkBk9FmG-Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540861767553:android:d70cc9c3504ead52225280",
+        "android_client_info": {
+          "package_name": "com.digid.eddokenaL"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTEe8TR1fH2_t5Lec1SbldNkBk9FmG-Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540861767553:android:722e533e532d429e225280",
+        "android_client_info": {
+          "package_name": "com.digid.eddokenaSOHACO"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTEe8TR1fH2_t5Lec1SbldNkBk9FmG-Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540861767553:android:0e4d48fb52a7b26a225280",
+        "android_client_info": {
+          "package_name": "com.digid.magshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTEe8TR1fH2_t5Lec1SbldNkBk9FmG-Jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540861767553-egp836mn793242a2a1vthnbujiegudev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

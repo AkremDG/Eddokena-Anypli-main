@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    tools:context=".DataLoading.DataLoadFragment">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/dataload_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Initialisation des données"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataload_tv" />
+
+
+    <TextView
+        android:id="@+id/articleCallStates_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Appel De Catalogue Article   "
+        android:textSize="10dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/articleInsertionStates_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Insertion Des Articles   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articleCallStates_tv" />
+
+    <TextView
+        android:id="@+id/clientCallStates_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Appel De Catalogue Client   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articleInsertionStates_tv" />
+
+    <TextView
+        android:id="@+id/clientsInsertionStates_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Insertion Des Clients   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clientCallStates_tv" />
+
+    <TextView
+        android:id="@+id/catalogueCallStates_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Appel De Catalogue   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clientsInsertionStates_tv" />
+
+    <TextView
+        android:id="@+id/catalogueInsertionStates_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Insertion De Catalogue   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueCallStates_tv" />
+
+    <TextView
+        android:id="@+id/commandeCallStates_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Appel De Commande   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueInsertionStates_tv" />
+
+    <TextView
+        android:id="@+id/commandeInsertionStates_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Insertion de Commande"
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commandeCallStates_tv" />
+
+    <TextView
+        android:id="@+id/conditionCallStates_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Appel De Conditionnement   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commandeInsertionStates_tv2" />
+
+    <TextView
+        android:id="@+id/conditionInsertionStates_tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Insertion De Conditionnement   "
+        android:textSize="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conditionCallStates_tv2" />
+
+    <TextView
+        android:id="@+id/download_compress_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Telechargement et Decompression   "
+        android:textSize="10dp"
+        android:background="@drawable/textviexshape_5"
+        android:fontFamily="@font/muli_light"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conditionInsertionStates_tv3" />
+
+    <ProgressBar
+        android:id="@+id/catalogueArticleCall_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <ProgressBar
+        android:id="@+id/catalogueArticleInsert_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueArticleCall_pb" />
+
+    <ProgressBar
+        android:id="@+id/catalogueClientCall_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueArticleInsert_pb" />
+
+    <ProgressBar
+        android:id="@+id/catalogueClientInsert_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueClientCall_pb" />
+
+    <ProgressBar
+        android:id="@+id/catalogueCall_pg"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueClientInsert_pb" />
+
+    <ProgressBar
+        android:id="@+id/catalogueInsert_pg"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueCall_pg" />
+
+    <ProgressBar
+        android:id="@+id/commandeCall_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueInsert_pg" />
+
+    <ProgressBar
+        android:id="@+id/commandeInsert_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/commandeCall_pb" />
+
+    <ProgressBar
+        android:id="@+id/conditionCall_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/commandeInsert_pb" />
+
+    <ProgressBar
+        android:id="@+id/conditionInsert_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/conditionCall_pb" />
+
+    <ImageView
+        android:id="@+id/catalogueArticleCall_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/call"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <ImageView
+        android:id="@+id/catalogueArticleInsert_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/insert"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueArticleCall_iv" />
+
+    <ImageView
+        android:id="@+id/catalogueClientCall_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/call"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueArticleInsert_iv" />
+
+    <ImageView
+        android:id="@+id/catalogueClientInsert_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/insert"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueClientCall_iv" />
+
+    <ImageView
+        android:id="@+id/conditionCall_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/call"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/commandeInsert_iv" />
+
+    <ImageView
+        android:id="@+id/commandeInsert_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/insert"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/commandeCall_iv" />
+
+    <ImageView
+        android:id="@+id/conditionInsert_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/insert"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/conditionCall_iv" />
+
+    <ImageView
+        android:id="@+id/catalogueCall_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/call"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueClientInsert_iv" />
+
+    <ImageView
+        android:id="@+id/commandeCall_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/call"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueInsert_iv" />
+
+    <ImageView
+        android:id="@+id/catalogueInsert_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/insert"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/catalogueCall_iv" />
+
+    <ProgressBar
+        android:id="@+id/decomress_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/download_pb"
+        app:layout_constraintTop_toBottomOf="@+id/conditionInsert_iv" />
+
+    <ProgressBar
+        android:id="@+id/download_pb"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/conditionInsert_iv" />
+
+    <ImageView
+        android:id="@+id/decomressdone_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/call"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/donwloaddon_iv"
+        app:layout_constraintTop_toBottomOf="@+id/conditionInsert_iv" />
+
+    <ImageView
+        android:id="@+id/donwloaddon_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/call"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/conditionInsert_iv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
