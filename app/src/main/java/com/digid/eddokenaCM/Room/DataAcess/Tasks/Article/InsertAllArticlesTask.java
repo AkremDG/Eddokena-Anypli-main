@@ -40,7 +40,9 @@ public class InsertAllArticlesTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
+
         try {
+
             for (Article art: aritcleList) {
 
 

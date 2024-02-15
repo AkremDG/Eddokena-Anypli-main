@@ -30,9 +30,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.MyHolder> 
 
     private MutableLiveData<Integer> nbValue = new MutableLiveData<>();
     int nb;
-
     int nbHorsStock;
-
     private static DecimalFormat df = new DecimalFormat("0.0000");
     private LinkedHashMap<String, Article> dataMap;
     private HashMap<Long, CMDItem> editModelArrayList = new HashMap<Long, CMDItem>();
@@ -90,6 +88,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.MyHolder> 
         if (selectedArticle.getType().equals("deal")){
             if (selectedArticle.getDealRemainingStock() == null){
                 holder.articleQteTv.setVisibility(View.VISIBLE);
+                holder.articleQteTv.setBackgroundColor(Color.RED);
 
                holder.articleQteEt.setVisibility(View.GONE);
 
@@ -97,6 +96,8 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.MyHolder> 
             } else {
                 if (selectedArticle.getDealRemainingStock() <=0){
                     holder.articleQteTv.setVisibility(View.VISIBLE);
+                    holder.articleQteTv.setBackgroundColor(Color.RED);
+
                    holder.articleQteEt.setVisibility(View.GONE);
 
 
@@ -104,13 +105,19 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.MyHolder> 
                     holder.articleQteTv.setVisibility(View.GONE);
 
                     holder.articleQteEt.setVisibility(View.VISIBLE);
+
+
                 }
             }
         } else {
             Log.i("ttttttttttttttt", "onBindViewHolder: "+ selectedArticle.getCurrentStock());
 
             if (selectedArticle.getCurrentStock() == null){
+
                 holder.articleQteTv.setVisibility(View.VISIBLE);
+                holder.articleQteTv.setBackgroundColor(Color.RED);
+
+
                 holder.articleQteEt.setVisibility(View.GONE);
 
 
@@ -118,7 +125,10 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.MyHolder> 
 
                 if (selectedArticle.getCurrentStock() <= 0){
                     holder.articleQteTv.setVisibility(View.VISIBLE);
+                    holder.articleQteTv.setBackgroundColor(Color.RED);
+
                     holder.articleQteEt.setVisibility(View.GONE);
+
                 } else {
                     holder.articleQteTv.setVisibility(View.GONE);
                     holder.articleQteEt.setVisibility(View.VISIBLE);

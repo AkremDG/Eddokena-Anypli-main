@@ -5,7 +5,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.digid.eddokenaCM.Models.Article;
 import com.digid.eddokenaCM.Models.Order;
+import com.digid.eddokenaCM.Models.OrderItem;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteEnteteLigneCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.InitEnteteTableCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.InsertAllEnteteTask;
@@ -43,10 +45,25 @@ public class HistoriqueAPI implements DeleteEnteteLigneCallback {
 
                 List<Order> ordersList= new ArrayList<>();
 
+                Log.i("kkkkkkkkkkkkkkl", String.valueOf(response.body()));
+
                 if (response.isSuccessful()) {
                     try {
                         ordersList.addAll(response.body());
                         callBack.onEnteteCallSuccess();
+                        /*
+                        for(Order order : ordersList){
+                            if(order.getStatus().equals("new")){
+                                List<OrderItem> orderItemList = new ArrayList<>();
+                                orderItemList.addAll(order.getLigneList());
+                                for(OrderItem orderItem : orderItemList){
+                                    orderItem.setFirstOrderRelated(true);
+                                }
+                                order.setLigneList(orderItemList);
+                            }
+                        }
+                         */
+
 
                         new InsertAllEnteteTask(context, ordersList, callBack,lignesCallback).execute();
 

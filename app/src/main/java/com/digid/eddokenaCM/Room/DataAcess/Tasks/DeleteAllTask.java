@@ -27,35 +27,62 @@ public class DeleteAllTask extends AsyncTask<Void, Void, Integer> {
         int resultClt = -1;
         int resultCat = -1;
         int resultCon = -1;
+        //Newwwwwwwwwwwwwwwwwwwwwwwwwwwwww for action==1
+        int resultArticleStock = -1;
+        int resultArticle = -1;
+        //Newwwwwwwwwwwwwwwwwwwwwwwwwwwwww for action==else
+        int resultArticleStockSynch = -1;
+        //Newwwwwwwwwwwwwwwwwwwwwwwwwwwwww for action==0
+        int resultArticleStockLogin = -1;
 
         if (action==0){
 
-            resultArtPrice = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePrice();
-            resultArtPcs = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePcs();
-            resultArt = MyDB.getInstance(context).fAritcleDAO().deleteAll();
-            resultClt = MyDB.getInstance(context).fComptetDAO().deleteAll();
+            try {
+                resultArtPrice = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePrice();
+                resultArtPcs = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePcs();
+                resultArt = MyDB.getInstance(context).fAritcleDAO().deleteAll();
+                resultClt = MyDB.getInstance(context).fComptetDAO().deleteAll();
+                resultCat = MyDB.getInstance(context).fCatalogueDAO().deleteAll();
+                resultCon = MyDB.getInstance(context).conditionDao().deleteAll();
+                resultArticleStockLogin = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlesStock();
+                return resultArt+resultClt+resultCat+resultCon+resultArtPcs+resultArtPrice+resultArticleStockLogin;
+            }catch (Exception e){
+                return null;
+            }
 
-            resultCat = MyDB.getInstance(context).fCatalogueDAO().deleteAll();
 
-            resultCon = MyDB.getInstance(context).conditionDao().deleteAll();
 
-            Log.i("CATEEEEEEEEEEEEEE",String.valueOf(resultCat));
-
-            return resultArt+resultClt+resultCat+resultCon+resultArtPcs+resultArtPrice;
         } else if (action==1){
+            Log.i("unnnnnnnnnnn", "ici");
 
-            resultEnt = MyDB.getInstance(context).fCmdEnteteDAO().deleteAll();
-            resultLig = MyDB.getInstance(context).fCmdLigneDAO().deleteAll();
-            return resultEnt + resultLig;
+            try{
+                resultEnt = MyDB.getInstance(context).fCmdEnteteDAO().deleteAll();
+                resultLig = MyDB.getInstance(context).fCmdLigneDAO().deleteAll();
+                resultArticleStock = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlesStock();
+                resultArticle = MyDB.getInstance(context).fAritcleDAO().deleteAll();
+
+                return resultEnt + resultLig + resultArticleStock + resultArticle;
+            }catch (Exception e){
+                return null;
+            }
+
         } else {
-            resultArtPrice = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePrice();
-            resultArtPcs = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePcs();
-            resultArt = MyDB.getInstance(context).fAritcleDAO().deleteAll();
-            resultClt = MyDB.getInstance(context).fComptetDAO().deleteAll();
-            resultCat = MyDB.getInstance(context).fCatalogueDAO().deleteAll();
-            resultCon = MyDB.getInstance(context).conditionDao().deleteAll();
+            Log.i("elseeeeeeeeeeeee", "ici");
 
-            return resultArt+resultClt+resultCat+resultCon+resultArtPrice+resultArtPcs;
+            try {
+                resultArtPrice = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePrice();
+                resultArtPcs = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlePcs();
+                resultArt = MyDB.getInstance(context).fAritcleDAO().deleteAll();
+                resultClt = MyDB.getInstance(context).fComptetDAO().deleteAll();
+                resultCat = MyDB.getInstance(context).fCatalogueDAO().deleteAll();
+                resultCon = MyDB.getInstance(context).conditionDao().deleteAll();
+                resultArticleStockSynch = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlesStock();
+
+                return resultArt+resultClt+resultCat+resultCon+resultArtPrice+resultArtPcs+resultArticleStockSynch;
+            }catch (Exception e){
+                return null;
+            }
+
         }
 
     }
@@ -64,26 +91,59 @@ public class DeleteAllTask extends AsyncTask<Void, Void, Integer> {
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
         if (action==0) {
-            if (result != -6) {
+
+            if(result == null){
+                callback.onDelteError(result);
+            }else {
                 callback.onDeleteSucces();
+            }
+
+            /*OLD CHARFA
+            if (result != -7) {
+                Log.i("AAAAAAAAAAAAAAAK", String.valueOf(result));
 
             } else {
                 callback.onDelteError(result);
+
             }
+
+             */
+
         } else if (action==1) {
-            if (result != -2) {
+            if(result == null){
+                callback.onDelteError(result);
+            }else {
+                callback.onDeleteSucces();
+            }
+            /*old charfaaa
+            if (result != -4) {
+                //Newwwwwwwwwwwwwwwwwwwww
                 callback.onDeleteSucces();
 
             } else {
                 callback.onDelteError(result);
+
             }
+
+             */
         } else {
-            if (result != -6) {
-                callback.onDeleteSucces();
 
+            if(result == null){
+                callback.onDelteError(result);
+            }else {
+                callback.onDeleteSucces();
+            }
+            /*
+            if (result != -7) {
+
+                callback.onDeleteSucces();
+                Log.i("sab3aaa", "true: ");
             } else {
                 callback.onDelteError(result);
+                Log.i("sab3aaa", "false: ");
+
             }
+             */
         }
 
     }

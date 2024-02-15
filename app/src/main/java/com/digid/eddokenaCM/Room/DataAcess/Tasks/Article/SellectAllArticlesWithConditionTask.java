@@ -92,7 +92,9 @@ public class SellectAllArticlesWithConditionTask extends AsyncTask<Void, Void, L
 
                 if (id !=null) {
 
-                    warehouseId = MyDB.getInstance(context).fAritcleDAO().getWarehouseIdByCategory(catId);
+                    Log.i("idClientttttRRR", String.valueOf(dealTargetFilter.getClientId()));
+
+                    warehouseId = MyDB.getInstance(context).fAritcleDAO().getWarehouseIdByCategory(catId,dealTargetFilter.getClientId());
 
                     ArticleStock articleStock = MyDB.getInstance(context).fAritcleDAO().geArticleStocks(warehouseId, art.getId());
 
@@ -111,23 +113,22 @@ public class SellectAllArticlesWithConditionTask extends AsyncTask<Void, Void, L
 
                 }
                 else {
-
-
                         // dima -1
                     art.setCurrentStock(-1d);
 
                     long idCatalog=     MyDB.getInstance(context).fAritcleDAO().articleGetIdCatalogByArticleId(art.getId());
-                    long warehouseIdClient = MyDB.getInstance(context).fAritcleDAO().getWarehouseIdByCategory(idCatalog);
+
+                    long warehouseIdClient = MyDB.getInstance(context).fAritcleDAO().getWarehouseIdByCategory(idCatalog,dealTargetFilter.getClientId());
 
                     ArticleStock articleStock = MyDB.getInstance(context).fAritcleDAO().geArticleStocks(warehouseIdClient, art.getId());
 
                         if(articleStock != null){
-                            art.setCurrentStock(articleStock.getCurrentStock());
+
+                                art.setCurrentStock(articleStock.getCurrentStock());
+
                         }else{
                             art.setCurrentStock(0d);
-
                         }
-
 
                     /* VERSION NJIBOU LES ARTICLES LKOLL M LOWEL
                     List<String> clientsCategories = new ArrayList<>();

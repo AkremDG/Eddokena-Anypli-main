@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,8 +28,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Delete;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.digid.eddokenaCM.Models.Article;
 import com.digid.eddokenaCM.Models.Order;
 import com.digid.eddokenaCM.Models.OrderItem;
 import com.digid.eddokenaCM.Models.OrderRequest;
@@ -37,6 +41,7 @@ import com.digid.eddokenaCM.Models.OrderRequestObjectItem;
 import com.digid.eddokenaCM.Models.OrderRequestObjectItemQte;
 import com.digid.eddokenaCM.Models.Statut;
 import com.digid.eddokenaCM.R;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.Article.InitArticleTableCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteAllCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteAllTask;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.DeleteOrderByIdCallback;
@@ -55,6 +60,7 @@ import com.digid.eddokenaCM.Utils.PopManager;
 import com.digid.eddokenaCM.Utils.Preferences;
 import com.digid.eddokenaCM.Utils.SessionManager;
 import com.digid.eddokenaCM.Utils.Utilities;
+import com.digid.eddokenaCM.WebServices.Articles.ArticlesAPI;
 import com.digid.eddokenaCM.WebServices.Commande.CommendeAPI;
 import com.digid.eddokenaCM.WebServices.Commande.SingleCommandeCallback;
 import com.digid.eddokenaCM.WebServices.Historique.HistoriqueAPI;
@@ -170,8 +176,6 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
         StatutFilterAdapter statutFilterAdapter = new StatutFilterAdapter(getContext(), listStatut);
         searchSv.setAdapter(statutFilterAdapter);
 
-
-
         Calendar cal = Calendar.getInstance();
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
         switch (dayOfWeek) {
@@ -280,7 +284,6 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
 
                     new DeleteAllTask(getContext(),1, HistoriqueCoFragment.this).execute();
 
-                    Log.i("historique", "onClick: ");
                 } else {
                     popUp.showDialog("connectionerror");
                     connectionDialog = popUp.getConnectionErrorDialog();
@@ -808,13 +811,12 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
         facture.putString("FactureValidation", dataList.get(position).getStatus());
         facture.putString("FactureDate", dataList.get(position).getDoDate());
 
-
             facture.putLong("ClientCat", dataList.get(position).getClient().getCategoryId());
-
         facture.putLong("ClientCtNum", dataList.get(position).getClientId());
         //facture.putString("ClientDoRef", dataList.get(position).getDoRef());
         if (dataList.get(position).getLocal() != null)
             facture.putBoolean("Local", dataList.get(position).getLocal());
+
         if (dataList.get(position).getIdBo() == null) {
             facture.putString("Do_Piece", null);
         }
@@ -822,9 +824,15 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
             facture.putString("Do_Piece", String.valueOf(dataList.get(position).getIdBo()));
         }
 
-        Log.i("TestModdifSelection", "onClientClick: " +  dataList.get(position).getIdOrder() );
         facture.putLong("idLocal_Cmd", dataList.get(position).getIdOrder());
 
+
+        try {
+            facture.putString("status", dataList.get(position).getStatus());
+            facture.putInt("idBo", dataList.get(position).getIdBo());
+        }catch (Exception e){
+            Log.i("eeet", String.valueOf(e.getMessage()));
+        }
 
 
 
@@ -839,11 +847,19 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
     @Override
     public void onSelectionEnteteNullSuccess(List<Order> orderList) {
 
-
+        Log.i("taOOOOOOO", String.valueOf(orderList.size()));
 
         for(Order order : orderList)
         {
-            Log.d("ALOOOOOOO",String.valueOf(order.getIdBo()));
+            Log.i("********************************************************************", String.valueOf(order.getRef()));
+
+            Log.i("REFERENCEEEEEEEEEEEEEE", String.valueOf(order.getRef()));
+            Log.i("STATUSSSSSSSSSSSSSSS", String.valueOf(order.getStatus()));
+
+            for(OrderItem orderItem : order.getLigneList()){
+                orderItem.toString();
+                Log.i("nbbbbbbbbbop", orderItem.toString());
+            }
 
         }
 
@@ -914,15 +930,13 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
     @Override
     public void onSelectionEnteteNotNullSuccess(List<Order> orderList) {
 
+        Log.i("SIZEPOPOPEAZEAZ", String.valueOf(orderList.get(0).getLigneList().size()));
+
+
 
         Log.i("historique", "onSelectionEnteteNotNullSuccess: ");
         dataList.clear();
         dataList = orderList;
-
-
-        for(Order order : dataList){
-            Log.d("ORDERrrrrrrrrrrrrr",order.toString());
-        }
 
 
 
@@ -1222,8 +1236,45 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
 
     @Override
     public void onDeleteSucces() {
+
+        popUp.showDialog("loadingDialog");
+
         Log.i("historique", "onDeleteSucces: ");
-       new HistoriqueAPI().getCmdEntete(getContext(), SessionManager.getInstance().getToken(getContext()), HistoriqueCoFragment.this, HistoriqueCoFragment.this,HistoriqueCoFragment.this);
+        new ArticlesAPI().getArticles(getContext(), new InitArticleTableCallback() {
+            @Override
+            public void onArticleCallFailed() {
+
+            }
+
+            @Override
+            public void onArticleCallSuccess() {
+
+            }
+
+            @Override
+            public void getArticlesListCallback(List<Article> articleList) {
+
+            }
+
+            @Override
+            public void onArticleInsertionError() {
+
+            }
+
+            @Override
+            public void onArticleInsertionSuccess() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        popUp.hideDialog("loadingDialog");
+
+                    }
+                });
+
+            }
+        });
+
+        new HistoriqueAPI().getCmdEntete(getContext(), SessionManager.getInstance().getToken(getContext()), HistoriqueCoFragment.this, HistoriqueCoFragment.this,HistoriqueCoFragment.this);
     }
 
     @Override
@@ -1234,8 +1285,6 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
 
     @Override
     public void onValidClick(int position, List<OrderItem> orderItemList) {
-
-
         clickPosition= position;
 
         new SellectAllLigneByIdTask(getContext(), "", dataList.get(position).getClientId(),
@@ -1280,8 +1329,7 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
                             listQte.add(new OrderRequestObjectItemQte(item.getPackingType(), item.getQty()));
                             list.add(new OrderRequestObjectItem(item.getArticleId(), listQte,Pu));
 
-                            Log.i("OOOOOO",String.valueOf(item.getTotalAmount()));
-
+                            Log.i("idBOOOOOxxxxx",item.toString());
                         }
 
 
@@ -1295,12 +1343,13 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
 
                             popUp.showDialog("loadingDialog");
 
-
                             selectedOrderRequestObject.setDate(Utilities.getInstance().getBOStringFromCalendar(Calendar.getInstance()));
+
 
                             new CommendeAPI().addFacture(getContext(), new OrderRequest(selectedOrderRequestObject),
                                     SessionManager.getInstance().getToken(getContext()),
                                     HistoriqueCoFragment.this);
+
 
                         } else {
                             popUp.showDialog("connectionErrorCancelable");
@@ -1324,6 +1373,7 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
     @Override
     public void addCmdSuccess(Long idCmdLocal, String doPiece) {
 
+
         new DeleteOrderByIdTask(getContext(),this,idCmdLocal).execute();
 
     }
@@ -1332,20 +1382,59 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
     public void addCmdFailed(String error) {
         Log.d("DeleteTaskFailure",error);
         popUp.hideDialog("loadingDialog");
-        Toast.makeText(getContext(), "Connexion au serveur perdue", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Veuillez Synchroniser et réessayer !", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onDeleteOrderByIdSuccess() {
-        new Handler().postDelayed(new Runnable() {
+
+        new DeleteAllTask(getContext(), 1, new DeleteAllCallback() {
             @Override
-            public void run() {
-                dataList.remove(clickPosition);
-                commandesAdapter.notifyItemRemoved(clickPosition);
-                popUp.hideDialog("loadingDialog");
+            public void onDeleteSucces() {
+                new ArticlesAPI().getArticles(getContext(), new InitArticleTableCallback() {
+                    @Override
+                    public void onArticleCallFailed() {
+
+                    }
+
+                    @Override
+                    public void onArticleCallSuccess() {
+
+                    }
+
+                    @Override
+                    public void getArticlesListCallback(List<Article> articleList) {
+
+                    }
+
+                    @Override
+                    public void onArticleInsertionError() {
+
+                    }
+
+                    @Override
+                    public void onArticleInsertionSuccess() {
+
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                popUp.hideDialog("loadingDialog");
+
+                                dataList.remove(clickPosition);
+                                commandesAdapter.notifyItemRemoved(clickPosition);
+                            }
+                        });
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onDelteError(int result) {
 
             }
-        },200);
+        }).execute();
 
 
     }

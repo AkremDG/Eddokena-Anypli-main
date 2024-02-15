@@ -287,11 +287,12 @@ public class LoginFragment extends Fragment implements AuthenticationCallback, D
             });
         }
 
-
     }
 
     @Override
     public void onDelteError(int result) {
+        Toast.makeText(getContext(), " FAILLLLLLLLL", Toast.LENGTH_SHORT).show();
+
     }
 
     /*

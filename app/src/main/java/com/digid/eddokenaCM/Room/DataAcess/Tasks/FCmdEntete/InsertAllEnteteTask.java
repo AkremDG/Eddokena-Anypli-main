@@ -9,6 +9,7 @@ import com.digid.eddokenaCM.Models.OrderItem;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdLigne.InsertAllLigneCallback;
 import com.digid.eddokenaCM.Room.MyDB;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InsertAllEnteteTask extends AsyncTask<Void, Void, Boolean> {
@@ -40,6 +41,10 @@ public class InsertAllEnteteTask extends AsyncTask<Void, Void, Boolean> {
                 long  id = MyDB.getInstance(context).fCmdEnteteDAO().insert(newOrder);
 
                 for (OrderItem orderItem : newOrder.getLigneList()) {
+
+
+
+
                     OrderItem newOrderItem = orderItem;
                     newOrderItem.setIdCmdLocal(id);
                     newOrderItem.setIdBo(newOrder.getIdBo());
@@ -51,6 +56,8 @@ public class InsertAllEnteteTask extends AsyncTask<Void, Void, Boolean> {
                     newOrderItem.setTotalAmount(newOrderItem.getTotal().getTotalAmount());
 
                     MyDB.getInstance(context).fCmdLigneDAO().insert(newOrderItem);
+
+
                 }
             }
             result=true;

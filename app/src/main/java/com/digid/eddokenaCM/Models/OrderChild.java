@@ -1,6 +1,5 @@
 package com.digid.eddokenaCM.Models;
 
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -12,8 +11,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(tableName = "Order")
-public class Order {
+@Entity(tableName = "OrderChild")
+public class OrderChild {
 
     // correction : Duplicated id declaration : JSON ERROR (RETROFIT)
     @PrimaryKey(autoGenerate = true)
@@ -21,16 +20,12 @@ public class Order {
     @ColumnInfo(name = "idOrder")
     private long idOrder;
 
+    @ColumnInfo(name = "originOrderId")
+    private long originOrderId;
 
     @ColumnInfo(name = "idBo")
     @SerializedName("id")
     private Integer idBo;
-
-
-    @ColumnInfo(name = "originOrderId")
-    @SerializedName("originOrderId")
-    private long originOrderId;
-
 
 
     @ColumnInfo(name = "local")
@@ -87,12 +82,11 @@ public class Order {
     @SerializedName("items")
     List<OrderItem> ligneList = new ArrayList<>();
 
-
-    public Order() {
+    public OrderChild() {
     }
 
-    public Order(Integer idBo, long coNo, String db, String ref, String doDate, Long clientId,
-                 String status, String note, boolean local) {
+    public OrderChild(Integer idBo, long coNo, String db, String ref, String doDate, Long clientId,
+                 String status, String note, boolean local, long originOrderId) {
         this.idBo = idBo;
         this.coNo = coNo;
         this.db = db;
@@ -102,14 +96,7 @@ public class Order {
         this.status = status;
         this.note = note;
         this.local = local;
-    }
-
-    public long getOriginOrderId() {
-        return originOrderId;
-    }
-
-    public void setOriginOrderId(long originOrderId) {
-        this.originOrderId = originOrderId;
+        this.originOrderId=originOrderId;
     }
 
     public long getIdOrder() {
@@ -118,6 +105,14 @@ public class Order {
 
     public void setIdOrder(long idOrder) {
         this.idOrder = idOrder;
+    }
+
+    public long getOriginOrderId() {
+        return originOrderId;
+    }
+
+    public void setOriginOrderId(long originOrderId) {
+        this.originOrderId = originOrderId;
     }
 
     public Integer getIdBo() {
@@ -160,14 +155,6 @@ public class Order {
         this.ref = ref;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public String getDoDate() {
         return doDate;
     }
@@ -182,6 +169,14 @@ public class Order {
 
     public void setClientId(Long clientId) {
         this.clientId = clientId;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getStatus() {
@@ -200,6 +195,14 @@ public class Order {
         this.note = note;
     }
 
+    public OrderTotal getTotal() {
+        return total;
+    }
+
+    public void setTotal(OrderTotal total) {
+        this.total = total;
+    }
+
     public float getDiscountAmount() {
         return discountAmount;
     }
@@ -216,14 +219,6 @@ public class Order {
         this.totalAmount = totalAmount;
     }
 
-    public OrderTotal getTotal() {
-        return total;
-    }
-
-    public void setTotal(OrderTotal total) {
-        this.total = total;
-    }
-
     public List<OrderItem> getLigneList() {
         return ligneList;
     }
@@ -234,8 +229,9 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "OrderChild{" +
                 "idOrder=" + idOrder +
+                ", originOrderId=" + originOrderId +
                 ", idBo=" + idBo +
                 ", local=" + local +
                 ", coNo=" + coNo +

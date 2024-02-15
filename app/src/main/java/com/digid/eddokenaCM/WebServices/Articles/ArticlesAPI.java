@@ -44,8 +44,6 @@ public class ArticlesAPI {
 
                             article.setIdCatalog(article.getArticleCatalogs().get(0).getIdBo());
 
-
-                            Log.i("theeIDeii", String.valueOf(article.getArticleCatalogs().get(0).getIdBo()));
                             articleList.add(article);
 
                         }

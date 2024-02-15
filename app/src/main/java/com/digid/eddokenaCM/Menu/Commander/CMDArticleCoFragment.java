@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Display;
@@ -47,12 +49,17 @@ import com.digid.eddokenaCM.Models.OrderRequestObjectExtra;
 import com.digid.eddokenaCM.Models.OrderRequestObjectItem;
 import com.digid.eddokenaCM.Models.OrderRequestObjectItemQte;
 import com.digid.eddokenaCM.R;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.Article.InitArticleTableCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.Article.SellectAllArticlesCallBack;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.Article.SellectAllArticlesWithConditionTask;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteAllCallback;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteAllTask;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteEnteteLigneCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteEnteteLigneTask;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCatalogue.SellectAllCatalogueByLevelCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCatalogue.SellectAllCatalogueByLevelTask;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.DeleteOrderByIdCallback;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.DeleteOrderByIdTask;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.SelectEnteteByIdLocalCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.SelectEnteteByIdLocalTask;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.UpdateEnteteDoPieceCallback;
@@ -68,6 +75,7 @@ import com.digid.eddokenaCM.Utils.PopManager;
 import com.digid.eddokenaCM.Utils.Preferences;
 import com.digid.eddokenaCM.Utils.SessionManager;
 import com.digid.eddokenaCM.Utils.Utilities;
+import com.digid.eddokenaCM.WebServices.Articles.ArticlesAPI;
 import com.digid.eddokenaCM.WebServices.Commande.CommendeAPI;
 import com.digid.eddokenaCM.WebServices.Commande.SingleCommandeCallback;
 import com.ibm.icu.text.RuleBasedNumberFormat;
@@ -88,10 +96,25 @@ import java.util.Map;
 public class CMDArticleCoFragment extends Fragment implements ClearMemory, SelectEnteteByIdLocalCallback, UpdateEnteteDoPieceCallback,
         SingleCommandeCallback, DeleteEnteteLigneCallback, SellectAllLigneByIdCallback, InsertEnteteLignesCallback,
         PanierAdapter.onClickListner, ConditionAdapter.onClickListner, CMDArticleCoAdapter.onClickListner,
-        CMDCatalogueAdapter.onClickListner, SellectAllCatalogueByLevelCallback, SellectAllArticlesCallBack {
+        CMDCatalogueAdapter.onClickListner, SellectAllCatalogueByLevelCallback, SellectAllArticlesCallBack, DeleteOrderByIdCallback {
+
+    private int idBoNew;
+    private String statusNew;
+    Boolean isFirstAlone=false;
+    List<OrderItem> selectedFirstCmdLignesList = new ArrayList<OrderItem>();
+    OrderRequestObject selectedFirstOrderRequestObject;
+
+     OrderRequestObject selectedSecondOrderRequestObject;
+
+    Order firstSelectedOrder;
+     Order secondSelectedOrder;
+
+
+
+
+
     private static DecimalFormat df = new DecimalFormat("0.0000");
     private static DecimalFormat dff = new DecimalFormat("0.000");
-
     List<OrderItem> orderItems = new ArrayList<>();
 
     Double primarySelectedPrice,DiscountPercentage,finalDiscounted;
@@ -216,10 +239,16 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                 idLocal = getArguments().getLong("idLocal_Cmd");
                 CatalogIdIntent = getArguments().getString("CatalogIdFacture");
 
+               idBoNew =  getArguments().getInt("idBo", idBoNew);
+               statusNew = getArguments().getString("status", statusNew);
+
+
+
                 Log.i("TestModdifSelection", "onViewCreateddd: "+ idLocal);
             }
 
         }
+
 
         popUp = new PopManager(view.getContext());
         uiMapping(view);
@@ -277,16 +306,14 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
      */
     
     private void initData(View view) {
-
-         popUp.showDialog("loadingDialog");
-
+        if(idBoNew>0 && statusNew.equals("new") ){
+            panierValdierBtn.setVisibility(View.GONE);
+        }
+        popUp.showDialog("loadingDialog");
 
         Log.i("MyIDDDDDDD",String.valueOf(CatalogIdIntent));
-
-
         Log.i("clientIdCOMMANDER",String.valueOf(clientId));
         Log.i("clientIdHistorique",String.valueOf(clientCtNum));
-
 
         /////////////////////////////////////////////////////////////////////////////// Use clientCtNum IF BUG MODIFICATION
         new SellectAllArticlesWithConditionTask(view.getContext(), new DealTargetFilter(clientCtNum, clientCat, zoneId, classId),
@@ -305,6 +332,8 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                 if (doPiece == null) {
                     Log.i("TestModdifSelection", "initData: "+ idLocal);
                     new SellectAllLigneByIdTask(view.getContext(), "", clientCtNum, idLocal, this::onAllLigneSelectionSuccess).execute();
+
+
                 } else {
                     Log.i("TestModdifSelection", "initData: 2"+ doPiece);
                     new SellectAllLigneByIdTask(view.getContext(), doPiece, clientCtNum, idLocal, this::onAllLigneSelectionSuccess).execute();
@@ -381,8 +410,9 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
 
                     Log.i("IEEEEEDENTIFIANT",String.valueOf(clientCat));
 
+                    // clientCtNum was client id
                     new SellectAllArticlesWithConditionTask(getContext(),
-                            new DealTargetFilter(clientId, clientCat, zoneId, classId), null, null,
+                            new DealTargetFilter(clientCtNum, clientCat, zoneId, classId), null, null,
                             0,clientCat,"CmdArticle", clientCategoryScopeList, CMDArticleCoFragment.this).execute();
 
                     new SellectAllCatalogueByLevelTask(getContext(), null, clientCategoryScopeList, CMDArticleCoFragment.this).execute();
@@ -393,7 +423,9 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                     selectCatalogueList.remove(selectCatalogueList.size()-1);
                     //firstFamilleLl.setVisibility(View.GONE);
 
-                    new SellectAllArticlesWithConditionTask(getContext(), new DealTargetFilter(clientId, clientCat, zoneId, classId),
+
+
+                    new SellectAllArticlesWithConditionTask(getContext(), new DealTargetFilter(clientCtNum, clientCat, zoneId, classId),
                             selectCatalogueList.get(selectCatalogueList.size()-1).getId(),
                             selectCatalogueList.get(0).getId(),
                             selectCatalogueList.get(selectCatalogueList.size()-1).getLevel(),
@@ -434,8 +466,10 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
 
                         if (fragmentId.equals("ConsultationCommandFragment")) {
                             //todo mich haka hadhi
-                            Order order = new Order(null, SessionManager.getInstance().getUserCoId(getContext()), SessionManager.getInstance().getBD(getContext())
-                                    , "", Utilities.getInstance().getStringFromCalendar(Calendar.getInstance()), clientCtNum, "new", panierCommentaireEt.getText().toString(), true);
+                            Order order = new Order(null, SessionManager.getInstance().getUserCoId(getContext()),
+                                    SessionManager.getInstance().getBD(getContext())
+                                    , "", Utilities.getInstance().getStringFromCalendar(Calendar.getInstance()),
+                                    clientCtNum, "new", panierCommentaireEt.getText().toString(), true);
 
                             for (Map.Entry<String, Article> entry : panierData.entrySet()) {
                                 totalPrix = totalPrix + editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice();
@@ -444,13 +478,16 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                                         .getSelectedCondition(), editModelArrayList.get(entry.getValue().getId()).getSelectedQte(),
                                         editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice());
 
-
-
-
                                 selectedCmdLignesList.add(orderItem);
                             }
                             order.getLigneList().clear();
+
                             order.setLigneList(selectedCmdLignesList);
+
+                            for(OrderItem orderItem : selectedCmdLignesList){
+                                Log.i("hertazazaa", orderItem.toString());
+                            }
+
                             order.setTotalAmount(totalPrix);
                             selectedOrder = order;
                             popUp.showDialog("dataload");
@@ -474,6 +511,11 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                                     editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice()));
                         }
                         order.setLigneList(selectedCmdLignesList);
+
+                        for(OrderItem orderItem : selectedCmdLignesList){
+                            Log.i("hertazazaa", orderItem.toString());
+                        }
+
                         order.setTotalAmount(totalPrix);
                         selectedOrder = order;
                         popUp.showDialog("dataload");
@@ -492,6 +534,9 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
 
                         if(order.getLigneList().size()>0)
                         {
+                            for(OrderItem orderItem : order.getLigneList()){
+                                Log.i("aaaaawppppppp", orderItem.toString());
+                            }
 
                             new InsertAllEnteteLignesTask(getContext(), order, CMDArticleCoFragment.this).execute();
                         }else {
@@ -965,9 +1010,10 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
             new SellectAllCatalogueByLevelTask(getContext(), selectCatalogueList.get(0).getId(),
                     clientCategoryScopeList, this::onSelectionCatalogueSuccess).execute();
 
-            Log.i("houuuuuuuuuuu", String.valueOf( selectCatalogueList.get(0).getId()));
+
+            //clientCtNum was clientId
             new SellectAllArticlesWithConditionTask(getContext(),
-                    new DealTargetFilter(clientId, clientCat, zoneId, classId),
+                    new DealTargetFilter(clientCtNum, clientCat, zoneId, classId),
                     selectCatalogueList.get(0).getId(),
                     selectCatalogueList.get(0).getId(),
                     selectCatalogueList.get(0).getLevel(),
@@ -986,9 +1032,9 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                     clientCategoryScopeList,this::onSelectionCatalogueSuccess).execute();
 
 
-
+            //clientCtNum was clientId
             new SellectAllArticlesWithConditionTask(getContext(),
-                    new DealTargetFilter(clientId, clientCat, zoneId, classId),
+                    new DealTargetFilter(clientCtNum, clientCat, zoneId, classId),
                     selectCatalogueList.get(selectCatalogueList.size()-1).getId(),
                     selectCatalogueList.get(0).getId(),
                     selectCatalogueList.get(selectCatalogueList.size()-1).getLevel(),
@@ -1167,10 +1213,7 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
     public void onAddClick(int position) {
         Article item = articleDataList.get(position);
 
-
-
         if (item.getType().equals("product")){
-
 
             Log.i("getSelectedQte",String.valueOf(editModelArrayList.get(item.getId()).getSelectedQte()));
             Log.i("getSelectedConditionQte","RESSS + " + String.valueOf(editModelArrayList.get(item.getId()).getSelectedConditionQte()));
@@ -1621,11 +1664,36 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
 
                     if (Utilities.getInstance().isOnline(getContext())) {
 
-                        selectedOrderRequestObject.setExpectedTotalAmount(null);
-                        selectedOrderRequestObject.setDate(Utilities.getInstance().getBOStringFromCalendar(Calendar.getInstance()));
+                        if(isFirstAlone==true){
 
-                        new CommendeAPI().addFacture(getContext(),
-                                new OrderRequest(selectedOrderRequestObject), SessionManager.getInstance().getToken(getContext()), CMDArticleCoFragment.this);
+                            selectedFirstOrderRequestObject.setExpectedTotalAmount(null);
+                            selectedFirstOrderRequestObject.setDate(Utilities.getInstance().getBOStringFromCalendar(Calendar.getInstance()));
+
+                            selectedSecondOrderRequestObject.setExpectedTotalAmount(null);
+                            selectedSecondOrderRequestObject.setDate(Utilities.getInstance().getBOStringFromCalendar(Calendar.getInstance()));
+
+
+                            new CommendeAPI().addFacture(getContext(),
+                                    new OrderRequest(selectedSecondOrderRequestObject),
+                                    SessionManager.getInstance().getToken(getContext()),
+                                    CMDArticleCoFragment.this);
+
+
+
+                        }else{
+                            selectedOrderRequestObject.setExpectedTotalAmount(null);
+                            selectedOrderRequestObject.setDate(Utilities.getInstance().getBOStringFromCalendar(Calendar.getInstance()));
+
+                            new CommendeAPI().addFacture(getContext(),
+                                    new OrderRequest(selectedOrderRequestObject),
+                                    SessionManager.getInstance().getToken(getContext()),
+                                    CMDArticleCoFragment.this);
+                        }
+
+
+
+
+
 
                     } else {
                         popUp.hideDialog("dataload");
@@ -1686,13 +1754,15 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
     @Override
     public void onAllLigneSelectionSuccess(List<OrderItem> articleList) {
 
-        Log.i("kkkkfjfjfjf", "onAllLigneSelectionSuccess: ");
+
+
         selectedCmdLignesFromDBList = articleList;
         for (OrderItem item : articleList) {
 
+
+
             int pos = Utilities.getArticlePositionById(articleDataList, item.getArticleId());
 
-            Log.i("kkkkfjfjfjf", "onAllLigneSelectionSuccess: "+ pos);
             if (pos == -1){
                 //todo
             }
@@ -1790,6 +1860,10 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                 panierData.put(String.valueOf(item.getArticleId()), art);
                 i = i + 1;
             }
+
+            Log.i("ijaaaaaaaaaHNEE", item.toString());
+
+
         }
         String z = "Net à Payer  :" + df.format(totalPrixPanier);
         String y = "Marbou7ik  :  0";
@@ -1797,6 +1871,7 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
         panierTotalFactureTv.setText(z);
 
         try {
+
             panierAdapter = new PanierAdapter(panierData, editModelArrayList, this, this::onDeleteClick);
             panierRv.setAdapter(panierAdapter);
             panierRv.getAdapter().notifyItemInserted(i);
@@ -1817,19 +1892,30 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
 
         if (action.equals("sync")) {
 
+            Toast.makeText(getContext(), "sUCCESSSS SYNC", Toast.LENGTH_SHORT).show();
+
             popUp.hideDialog("dataload");
             Preferences.getInstance().deleteAllIdCmd(getContext());
             panierData.clear();
             panierRv.getAdapter().notifyDataSetChanged();
             articlesComRv.getAdapter().notifyDataSetChanged();
             panierMenu.toggle();
-            navController.popBackStack(R.id.menuCoFragment, false);
+
+            popUp.hideDialog("dataload");
+
             HashMap<Long, String> idDopeceMap = new HashMap<>();
             idDopeceMap.put(idCmdLocal, doPiece);
             new UpdateEnteteDoPieceTask(getContext(), idDopeceMap, CMDArticleCoFragment.this).execute();
 
         } else {
-            popUp.hideDialog("dataload");
+
+            Toast.makeText(getContext(), "sUCCESSSS ELSE", Toast.LENGTH_SHORT).show();
+
+
+            new DeleteOrderByIdTask(getContext(),this,idCmdLocal).execute();
+
+
+            /* old charfa
             Preferences.getInstance().deleteAllIdCmd(getContext());
             panierData.clear();
             panierRv.getAdapter().notifyDataSetChanged();
@@ -1838,7 +1924,12 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
             navController.popBackStack(R.id.menuCoFragment, false);
             HashMap<Long, String> idDopeceMap = new HashMap<>();
             idDopeceMap.put(idCmdLocal, doPiece);
+
             new UpdateEnteteDoPieceTask(getContext(), idDopeceMap, CMDArticleCoFragment.this).execute();
+
+             */
+
+
         }
 
     }
@@ -1851,7 +1942,7 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
     public void addCmdFailed(String error) {
         popUp.hideDialog("dataload");
         //sendLongSMS("28677624",error);
-        Toast.makeText(getContext(), "Connexion au serveur perdue", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Veuillez Synchroniser et réessayer !", Toast.LENGTH_LONG).show();
     }
 
     public void sendLongSMS(String phoneNo, String msg) {
@@ -1889,74 +1980,242 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
     @Override
     public void onSelectionSingleEnteteSuccess(Order order) {
 
-        Log.i("TestModdifSelectionn", "onSelectionSingleEnteteSuccess: "+ order);
+        if(order.getStatus().equals("new")&&order.getIdBo()!=null){
 
 
-        List<OrderItem> orderItems = new ArrayList<>();
+
+            if (arguments != null && arguments.containsKey("FragmentId")) {
+
+                if (fragmentId.equals("ConsultationCommandFragment")) {
+                    Toast.makeText(getContext(), "FIRST", Toast.LENGTH_SHORT).show();
+
+                    popUp.showDialog("dataload");
+                    Dialog dialog = popUp.getDataLoadDialog();
+                    TextView textView = dialog.findViewById(R.id.data_loading_TV);
+                    textView.setText("En Cours ....");
+                    //TA9SIMA
+                    isFirstAlone= true;
+
+                    float totalPrix = 0;
+                    i = 0;
+                    firstSelectedOrder= order;
+                    selectedFirstCmdLignesList.clear();
+
+                    firstSelectedOrder.setStatus("confirmed");
+
+                    selectedFirstOrderRequestObject = new OrderRequestObject(firstSelectedOrder.getDoDate(),
+                            firstSelectedOrder.getIdBo().longValue(),
+                            firstSelectedOrder.getClientId(),
+                            firstSelectedOrder.getClient().getShopId(),
+                            firstSelectedOrder.getNote(),
+                            firstSelectedOrder.getTotalAmount(),
+                            firstSelectedOrder.getStatus());
+
+                    selectedFirstOrderRequestObject.setExtra(new OrderRequestObjectExtra(firstSelectedOrder.getIdOrder()));
+
+                    firstSelectedOrder.setLigneList(selectedCmdLignesFromDBList);
+                    firstSelectedOrder.setTotalAmount(firstSelectedOrder.getTotalAmount());
+
+                    List<OrderRequestObjectItem> listAA = new ArrayList<>();
+
+                    for (OrderItem itemX : selectedCmdLignesFromDBList) {
+                        List<OrderRequestObjectItemQte> listQteE = new ArrayList<>();
+                        Double PuU = itemX.getTotalAmount()/itemX.getQty();
+                        listQteE.add(new OrderRequestObjectItemQte(itemX.getPackingType(), itemX.getQty()));
+                        listAA.add(new OrderRequestObjectItem(itemX.getArticleId(), listQteE,PuU));
+                    }
+
+                    selectedFirstOrderRequestObject.setItems(listAA);
+
+                    selectedFirstOrderRequestObject.setExpectedTotalAmount(null);// done
+
+                    Log.i("FirstORDERRRRRRRR", firstSelectedOrder.toString());
+
+                  //  new InsertAllEnteteLignesTask(getContext(), firstSelectedOrder, CMDArticleCoFragment.this).execute();
+
+                    float secondTotalPrix = 0;
+                    float secondOrderTotalPrix = 0;
+
+                    i = 0;
+                    secondSelectedOrder = order;
+                    selectedCmdLignesList.clear();
 
 
-        float totalPrix = 0;
-        i = 0;
-        selectedOrder = order;
-        selectedCmdLignesList.clear();
-        if (arguments != null && arguments.containsKey("FragmentId")) {
+                    if (arguments != null && arguments.containsKey("FragmentId")) {
 
-            if (fragmentId.equals("ConsultationCommandFragment")) {
+                        if (fragmentId.equals("ConsultationCommandFragment")) {
 
-                for (OrderItem item : selectedCmdLignesFromDBList) {
-                    if (panierData.get(String.valueOf(item.getArticleId())) == null) {
-                        orderItems.add(item);
+
+                            for (OrderItem item : selectedCmdLignesFromDBList) {
+                                if (panierData.get(String.valueOf(item.getArticleId())) == null) {
+                                    orderItems.add(item);
+                                }
+                            }
+
+                            for (Map.Entry<String, Article> entry : panierData.entrySet()) {
+                                secondTotalPrix = (float) (secondTotalPrix + editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice());
+                                selectedCmdLignesList.add(new OrderItem(secondSelectedOrder.getIdOrder(), Integer.valueOf(Math.toIntExact(entry.getValue().getId())), editModelArrayList.get(entry.getValue().getId()).getSelectedCondition(),
+                                        editModelArrayList.get(entry.getValue().getId()).getSelectedQte(), editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice()));
+                            }
+
+                            try {
+                                for(OrderItem orderItem : selectedCmdLignesList){
+                                    for(OrderItem itemsOld : selectedCmdLignesFromDBList){
+                                        if(orderItem.getArticleId()==itemsOld.getArticleId()){
+                                            selectedCmdLignesList.remove(orderItem);
+                                            Log.i("changeeedHERE", orderItem.toString());
+                                        }
+                                    }
+                                }
+                            }catch (Exception e){
+
+                            }
+
+
+                            for(OrderItem orderItem : selectedCmdLignesList){
+                                Log.i("IteeemPPPPPPPP",orderItem.toString());
+
+                            }
+
+                            order.setStatus("confirmed");
+
+                            if (order.getIdBo() != null)
+                                selectedSecondOrderRequestObject = new OrderRequestObject(
+                                        secondSelectedOrder.getDoDate(),
+                                        secondSelectedOrder.getIdBo().longValue(),
+                                        secondSelectedOrder.getClientId(),
+                                        secondSelectedOrder.getClient().getShopId(),
+                                        secondSelectedOrder.getNote(),
+                                        secondSelectedOrder.getTotalAmount(),
+                                        secondSelectedOrder.getStatus());
+
+                            selectedSecondOrderRequestObject.setExtra(new OrderRequestObjectExtra(secondSelectedOrder.getIdOrder()));
+
+                            List<OrderRequestObjectItem> list = new ArrayList<>();
+
+                            for (OrderItem item : selectedCmdLignesList) {
+                                List<OrderRequestObjectItemQte> listQte = new ArrayList<>();
+                                Double Pu = item.getTotalAmount()/item.getQty();
+                                listQte.add(new OrderRequestObjectItemQte(item.getPackingType(), item.getQty()));
+                                list.add(new OrderRequestObjectItem(item.getArticleId(), listQte,Pu));
+                            }
+
+                            selectedSecondOrderRequestObject.setItems(list);
+
+                            secondSelectedOrder.setLigneList(selectedCmdLignesList);
+
+                            secondSelectedOrder.setTotalAmount(secondTotalPrix-firstSelectedOrder.getTotalAmount());
+                            selectedSecondOrderRequestObject.setExpectedTotalAmount(null);
+
+                            Log.i("SecordORDERRRRRRRR", secondSelectedOrder.toString());
+
+
+                           // new InsertAllEnteteLignesTask(getContext(), secondSelectedOrder, CMDArticleCoFragment.this).execute();
+
+                            List<OrderRequestObject> orderRequestObjects = new ArrayList<>();
+
+                            selectedSecondOrderRequestObject.setOriginOrderId(order.getOriginOrderId());
+
+                            orderRequestObjects.add(selectedFirstOrderRequestObject);
+                            orderRequestObjects.add(selectedSecondOrderRequestObject);
+
+
+
+                            Log.i("ObjectONEEEEEE", String.valueOf(selectedFirstOrderRequestObject.toString()));
+                            Log.i("ObjectONEEEEEE", String.valueOf(selectedSecondOrderRequestObject.toString()));
+
+
+                            new CommendeAPI().addFacture(getContext(),
+                                    new OrderRequest(orderRequestObjects),
+                                    SessionManager.getInstance().getToken(getContext()),
+                                    CMDArticleCoFragment.this);
+
+
+                        }
                     }
 
                 }
+            }
 
-                for (Map.Entry<String, Article> entry : panierData.entrySet()) {
-                    totalPrix = (float) (totalPrix + editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice());
-                    selectedCmdLignesList.add(new OrderItem(order.getIdOrder(), Integer.valueOf(Math.toIntExact(entry.getValue().getId())), editModelArrayList.get(entry.getValue().getId()).getSelectedCondition(),
-                            editModelArrayList.get(entry.getValue().getId()).getSelectedQte(), editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice()));
+        }else if (order.getStatus().equals("new")&&order.getIdBo()==null){
+            isFirstAlone = false;
+
+
+            Toast.makeText(getContext(), "SECOND ", Toast.LENGTH_SHORT).show();
+            float totalPrix = 0;
+            i = 0;
+            selectedOrder = order;
+            selectedCmdLignesList.clear();
+            if (arguments != null && arguments.containsKey("FragmentId")) {
+
+                if (fragmentId.equals("ConsultationCommandFragment")) {
+
+
+                    for (OrderItem item : selectedCmdLignesFromDBList) {
+                        if (panierData.get(String.valueOf(item.getArticleId())) == null) {
+                            orderItems.add(item);
+                        }
+                    }
+
+                    for (Map.Entry<String, Article> entry : panierData.entrySet()) {
+                        totalPrix = (float) (totalPrix + editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice());
+                        selectedCmdLignesList.add(new OrderItem(order.getIdOrder(), Integer.valueOf(Math.toIntExact(entry.getValue().getId())), editModelArrayList.get(entry.getValue().getId()).getSelectedCondition(),
+                                editModelArrayList.get(entry.getValue().getId()).getSelectedQte(), editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice()));
+                    }
+
+                    order.setStatus("confirmed");
+
+                    if (order.getIdBo() != null)
+                        selectedOrderRequestObject = new OrderRequestObject(order.getDoDate(), order.getIdBo().longValue(),order.getClientId(),order.getClient().getShopId(),order.getNote(),
+                                order.getTotalAmount(),order.getStatus());
+                    else
+                        selectedOrderRequestObject = new OrderRequestObject(order.getDoDate(), null,order.getClientId(),order.getClient().getShopId(),order.getNote(),
+                                order.getTotalAmount(),order.getStatus());
+
+
+                    selectedOrderRequestObject.setExtra(new OrderRequestObjectExtra(order.getIdOrder()));
+
+                    List<OrderRequestObjectItem> list = new ArrayList<>();
+
+                    for (OrderItem item : selectedCmdLignesList) {
+                        List<OrderRequestObjectItemQte> listQte = new ArrayList<>();
+                        Double Pu = item.getTotalAmount()/item.getQty();
+                        listQte.add(new OrderRequestObjectItemQte(item.getPackingType(), item.getQty()));
+                        list.add(new OrderRequestObjectItem(item.getArticleId(), listQte,Pu));
+
+                    }
+
+                    selectedOrderRequestObject.setItems(list);
+
+                    order.setLigneList(selectedCmdLignesList);
+
+
+
+                    order.setTotalAmount(totalPrix);
+                    selectedOrder = order;
+
+                    popUp.showDialog("dataload");
+                    Dialog dialog = popUp.getDataLoadDialog();
+                    TextView textView = dialog.findViewById(R.id.data_loading_TV);
+                    textView.setText("En Cours ....");
+
+
+                    //selectedOrderRequestObject.setExpectedTotalAmount(selectedOrder.getTotalAmount());
+
+                    selectedOrderRequestObject.setExpectedTotalAmount(null);
+                    selectedOrderRequestObject.setDate(Utilities.getInstance().getBOStringFromCalendar(Calendar.getInstance()));
+
+                    new CommendeAPI().addFacture(getContext(),
+                            new OrderRequest(selectedOrderRequestObject),
+                            SessionManager.getInstance().getToken(getContext()),
+                            CMDArticleCoFragment.this);
+
+                     //new InsertAllEnteteLignesTask(getContext(), selectedOrder, CMDArticleCoFragment.this).execute();
                 }
-
-                order.setStatus("confirmed");
-
-                if (order.getIdBo() != null)
-                    selectedOrderRequestObject = new OrderRequestObject(order.getDoDate(), order.getIdBo().longValue(),order.getClientId(),order.getClient().getShopId(),order.getNote(),
-                            order.getTotalAmount(),order.getStatus());
-                else
-                    selectedOrderRequestObject = new OrderRequestObject(order.getDoDate(), null,order.getClientId(),order.getClient().getShopId(),order.getNote(),
-                            order.getTotalAmount(),order.getStatus());
-
-                selectedOrderRequestObject.setExtra(new OrderRequestObjectExtra(order.getIdOrder()));
-
-                List<OrderRequestObjectItem> list = new ArrayList<>();
-
-                for (OrderItem item : selectedCmdLignesList) {
-                    List<OrderRequestObjectItemQte> listQte = new ArrayList<>();
-                    Double Pu = item.getTotalAmount()/item.getQty();
-                    listQte.add(new OrderRequestObjectItemQte(item.getPackingType(), item.getQty()));
-                    list.add(new OrderRequestObjectItem(item.getArticleId(), listQte,Pu));
-
-                }
-
-                selectedOrderRequestObject.setItems(list);
-
-
-                order.setLigneList(selectedCmdLignesList);
-
-
-                order.setTotalAmount(totalPrix);
-                selectedOrder = order;
-
-                popUp.showDialog("dataload");
-                Dialog dialog = popUp.getDataLoadDialog();
-                TextView textView = dialog.findViewById(R.id.data_loading_TV);
-                textView.setText("En Cours ....");
-
-                selectedOrderRequestObject.setExpectedTotalAmount(selectedOrder.getTotalAmount());
-
-
-                new InsertAllEnteteLignesTask(getContext(), selectedOrder, CMDArticleCoFragment.this).execute();
             }
         }
+
+
     }
 
     /*
@@ -1983,4 +2242,58 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
         return ruleBasedNumberFormat.format(str);
     }
 
+    @Override
+    public void onDeleteOrderByIdSuccess() {
+
+        new DeleteAllTask(getContext(), 1, new DeleteAllCallback() {
+            @Override
+            public void onDeleteSucces() {
+                new ArticlesAPI().getArticles(getContext(), new InitArticleTableCallback() {
+                    @Override
+                    public void onArticleCallFailed() {
+
+                    }
+
+                    @Override
+                    public void onArticleCallSuccess() {
+
+                    }
+
+                    @Override
+                    public void getArticlesListCallback(List<Article> articleList) {
+
+                    }
+
+                    @Override
+                    public void onArticleInsertionError() {
+
+                    }
+
+                    @Override
+                    public void onArticleInsertionSuccess() {
+
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                popUp.hideDialog("dataload");
+                                navController.popBackStack(R.id.menuCoFragment, false);
+                            }
+                        });
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onDelteError(int result) {
+
+            }
+        }).execute();
+    }
+
+    @Override
+    public void onDeleteOrderByIdFailure() {
+
+    }
 }

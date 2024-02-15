@@ -1,6 +1,5 @@
 package com.digid.eddokenaCM.Models;
 
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

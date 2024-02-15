@@ -18,13 +18,16 @@ public class OrderItem {
     @ColumnInfo(name = "id")
     private long id;
 
+    @ColumnInfo(name = "isFirstOrderRelated")
+    private boolean isFirstOrderRelated;
+
     @ColumnInfo(name = "idCmdLocal")
     private Long idCmdLocal;
 
     @ColumnInfo(name = "idBo")
     private long idBo;
-
     @ColumnInfo(name = "ref")
+
     private String ref;
 
     // DocLigne local id
@@ -176,10 +179,19 @@ public class OrderItem {
         this.ref = ref;
     }
 
+    public boolean isFirstOrderRelated() {
+        return isFirstOrderRelated;
+    }
+
+    public void setFirstOrderRelated(boolean firstOrderRelated) {
+        isFirstOrderRelated = firstOrderRelated;
+    }
+
     @Override
     public String toString() {
         return "OrderItem{" +
                 "id=" + id +
+                ", isFirstOrderRelated=" + isFirstOrderRelated +
                 ", idCmdLocal=" + idCmdLocal +
                 ", idBo=" + idBo +
                 ", ref='" + ref + '\'' +

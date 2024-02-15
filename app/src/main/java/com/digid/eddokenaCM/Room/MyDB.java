@@ -35,12 +35,13 @@ import com.digid.eddokenaCM.Room.DataAcess.DAO.FComptetDAO;
         ArticlePcsMesure.class, Deal.class,Conditionnement.class, Catalog.class,
         Order.class, OrderItem.class, Client.class, ClientScope.class, DealTarget.class,
         ClientCategories.class, ClientClasses.class, Clients.class, DiscountsTarget.class,
-}, version =    17   , exportSchema = false)
+}, version =    20   , exportSchema = false)
 public abstract class MyDB extends RoomDatabase {
 
     public abstract FArticleDAO fAritcleDAO();
 
     public abstract FCatalogueDAO fCatalogueDAO();
+
 
     public abstract FCmdEnteteDAO fCmdEnteteDAO();
 

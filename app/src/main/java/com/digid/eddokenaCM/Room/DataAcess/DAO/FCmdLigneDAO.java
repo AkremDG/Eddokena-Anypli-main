@@ -14,6 +14,11 @@ import java.util.List;
 @Dao
 public interface FCmdLigneDAO {
 
+    @Query("UPDATE OrderItem SET isFirstOrderRelated=:value WHERE id=:id")
+    int UpdateIsFirstCmd(boolean value,long id);
+
+
+
     @Query("SELECT * FROM OrderItem WHERE Id=:id LIMIT 1")
     OrderItem findById(int id);
 

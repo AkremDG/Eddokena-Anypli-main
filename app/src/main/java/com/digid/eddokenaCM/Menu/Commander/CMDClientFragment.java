@@ -147,7 +147,12 @@ public class CMDClientFragment extends Fragment implements ClearMemory, CMDClien
         }
 
 
-        fragmentId.putString("CatalogId", dataList.get(position).getClientScopes().get(0).getCatalogId());
+        try {
+            fragmentId.putString("CatalogId", dataList.get(position).getClientScopes().get(0).getCatalogId());
+
+        }catch (Exception e){
+
+        }
 
         fragmentId.putString("ClientScope", scopes);
 

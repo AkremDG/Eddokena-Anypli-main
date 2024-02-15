@@ -13,7 +13,9 @@ public class OrderRequest {
     public OrderRequest(OrderRequestObject orderRequestObject) {
         this.orderRequestObjects.add(orderRequestObject);
     }
-
+    public OrderRequest(List<OrderRequestObject> orderRequestObjectList) {
+        this.orderRequestObjects = orderRequestObjectList;
+    }
     public List<OrderRequestObject> getOrderRequestObjects() {
         return orderRequestObjects;
     }

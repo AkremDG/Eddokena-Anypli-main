@@ -1,5 +1,7 @@
 package com.digid.eddokenaCM.Room.DataAcess.DAO;
 
+import static com.google.firebase.messaging.Constants.MessagePayloadKeys.FROM;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -18,7 +20,6 @@ import java.util.List;
 
 @Dao
 public interface FArticleDAO {
-
 
     @Query("SELECT * FROM Article where id=:id AND isSelected=:isSelected")
     List<Article> getAllArticlesByIdAndState(long id,Boolean isSelected);
@@ -75,12 +76,14 @@ public interface FArticleDAO {
     ArticleStock geArticleStocks(long warehouseId, long articleId);
 
 
+
     @Query("SELECT * FROM ArticleStock WHERE warehouseId  in (:warehouseIdList) AND idArticle=:articleId ")
    List<ArticleStock>  geArticleStocksList(List<Long> warehouseIdList, long articleId);
 
 
-    @Query("SELECT warehouseId from ClientScope where catalogId=:categoryId")
-    long getWarehouseIdByCategory(long categoryId);
+    @Query("SELECT warehouseId from ClientScope where catalogId=:categoryId and clientId=:clientId")
+    long getWarehouseIdByCategory(long categoryId, long clientId);
+
 
 
     @Query("SELECT idCatalog FROM Article where id=:articleId")
@@ -101,9 +104,10 @@ public interface FArticleDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertAllStock(List<ArticleStock> fArticleStockList);
 
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertAllDeals(List<Deal> dealList);
-
 
 
 
@@ -129,6 +133,9 @@ public interface FArticleDAO {
     @Update
     int update(Article fArticle);
 
+
+
+
     @Delete
     int delete(Article fArticle);
 
@@ -138,11 +145,12 @@ public interface FArticleDAO {
     @Query("DELETE FROM ArticlePricePcs")
     int deleteAllArticlePrice();
 
+    @Query("DELETE FROM ArticleStock")
+    int deleteAllArticlesStock();
+
     @Query("DELETE FROM ArticlePcsMesures")
     int deleteAllArticlePcs();
 
     @Query("DELETE FROM Deal")
     int deleteAllDeals();
-
-
 }

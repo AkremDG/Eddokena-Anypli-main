@@ -278,6 +278,8 @@ public class CMDArticleCoAdapter extends RecyclerView.Adapter<CMDArticleCoAdapte
                     holder.addArticleIv.setImageResource(R.drawable.iconpanier);
                     holder.qteTv.setVisibility(View.GONE);
                     holder.qteEt.setVisibility(View.VISIBLE);
+
+
                 } else {
                     holder.qteTv.setText("" + editModelArrayList.get(dataList.get(position).getId()).getSelectedQte());
                     holder.qteEt.setVisibility(View.GONE);
@@ -442,11 +444,16 @@ public class CMDArticleCoAdapter extends RecyclerView.Adapter<CMDArticleCoAdapte
 
                 case R.id.articlecomadd_bnt:
                     if (fragment.panierData.size() != 0) {
-                        if (fragment.panierData.get(dataList.get(getAdapterPosition()).getId()) == null) {
-                            this.clickListner.onAddClick(getAdapterPosition());
-                        } else {
-                            Log.i("tessst", "onClick: ");
+                        try {
+                            if (fragment.panierData.get(dataList.get(getAdapterPosition()).getId()) == null) {
+                                this.clickListner.onAddClick(getAdapterPosition());
+                            } else {
+                                Log.i("tessst", "onClick: ");
+                            }
+                        }catch (Exception e){
+                            Log.i("TAG", "onClick: ");
                         }
+
 
                     } else if (fragment.panierData.size() == 0) {
                         this.clickListner.onAddClick(getAdapterPosition());

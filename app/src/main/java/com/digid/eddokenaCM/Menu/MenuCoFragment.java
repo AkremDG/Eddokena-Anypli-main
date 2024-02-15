@@ -67,11 +67,9 @@ public class MenuCoFragment extends Fragment implements  InitArticleTableCallbac
     private TextView dataloadTv;
     private int done=0;
 
-
     public MenuCoFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -315,9 +313,12 @@ public class MenuCoFragment extends Fragment implements  InitArticleTableCallbac
 
         done=0;
 
+        //popUp.showDialog("dataload");
+
         new ArticlesAPI().getArticles(getContext(), this);
         new ClientsAPI().getClients(getContext(), Long.parseLong(SessionManager.getInstance().getUserId(getContext())), SessionManager.getInstance().getToken(getContext()), this);
         new CatalogueAPI().getCatalogue(getContext(), SessionManager.getInstance().getToken(getContext()), this);
+
     }
 
     @Override

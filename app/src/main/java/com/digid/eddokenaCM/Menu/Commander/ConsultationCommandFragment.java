@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,8 @@ import com.digid.eddokenaCM.R;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.Article.InitArticleTableCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.Article.findAllCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.Article.findAllTask;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteAllCallback;
+import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteAllTask;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteEnteteLigneCallback;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.DeleteEnteteLigneTask;
 import com.digid.eddokenaCM.Room.DataAcess.Tasks.FCmdEntete.DeleteOrderByIdCallback;
@@ -61,6 +65,7 @@ import com.digid.eddokenaCM.Utils.PopManager;
 import com.digid.eddokenaCM.Utils.Preferences;
 import com.digid.eddokenaCM.Utils.SessionManager;
 import com.digid.eddokenaCM.Utils.Utilities;
+import com.digid.eddokenaCM.WebServices.Articles.ArticlesAPI;
 import com.digid.eddokenaCM.WebServices.Commande.CommendeAPI;
 import com.digid.eddokenaCM.WebServices.Commande.SingleCommandeCallback;
 import com.ibm.icu.text.DecimalFormat;
@@ -108,6 +113,8 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
     private String factureDate;
     private String factureStatus;
     private long factureIdLocal;
+    private int idBoNew;
+    private String statusNew;
     private boolean factlocal;
     private Long clientCat;
     private Long clientId;
@@ -157,6 +164,11 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
 
         factureDoPiece = getArguments().getString("Do_Piece");
         factureIdLocal = getArguments().getLong("idLocal_Cmd");
+
+
+        idBoNew= getArguments().getInt("idBo");
+        statusNew= getArguments().getString("status");
+
 
         Log.i("TestModdifSelection", "onViewCreated: "+ factureIdLocal);
 
@@ -276,17 +288,15 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
                 facture.putString("ClientScope", clientScopes);
                 facture.putString("CatalogIdFacture", CatalogId);
 
-                //Select all these articles
-                //Set isSelected to true
 
-                // dataList.get(0).getArticle().getId();
+                facture.putInt("idBo", idBoNew);
+                facture.putString("status", statusNew);
 
 
                 for(int i=0;i<dataList.size();i++){
                     Log.i("pppppppppppp", String.valueOf(dataList.get(i).getArticle().getNameFr()));
                     listIdsArticles.add(dataList.get(i).getArticle().getId());
                 }
-
 
                 new findAllTask(getContext(), listIdsArticles, new findAllCallback() {
                     @Override
@@ -328,7 +338,6 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
                     TextView txt = dialogg.findViewById(R.id.data_loading_TV);
                     txt.setText("En Cours ...");
                     new SelectEnteteByIdLocalTask(getContext(), factureIdLocal, ConsultationCommandFragment.this::onSelectionSingleEnteteSuccess).execute();
-
                 }
             }
         });
@@ -467,6 +476,9 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
 
 
             for (OrderItem article : articleList) {
+
+                Log.i("FirstSelectedd", article.toString());
+
                 totalPrix = (float) (totalPrix + (article.getTotalAmount()));
 
             }
@@ -557,7 +569,10 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
                 selectedOrderRequestObject.setExpectedTotalAmount(null);
                 selectedOrderRequestObject.setDate(Utilities.getInstance().getBOStringFromCalendar(Calendar.getInstance()));
 
-                new CommendeAPI().addFacture(getContext(), new OrderRequest(selectedOrderRequestObject), SessionManager.getInstance().getToken(getContext()), ConsultationCommandFragment.this);
+                popUp.showDialog("loadingDialog");
+                new CommendeAPI().addFacture(getContext(), new OrderRequest(selectedOrderRequestObject),
+                        SessionManager.getInstance().getToken(getContext()), ConsultationCommandFragment.this);
+
 
                 //new ArticlesAPI().getArticles(getContext(), this);
 
@@ -694,12 +709,11 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
         popUp.hideDialog("loadingDialog");
         popUp.hideDialog("dataload");
         //sendLongSMS("28677624",error);
-        Toast.makeText(getContext(), "Connexion au serveur perdue", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Veuillez Synchroniser et réessayer !", Toast.LENGTH_LONG).show();
     }
     /*
      *  Launching worker in case no internet availble
      */
-
     public void launchSyncCmdWorker() {
 
         NotificationManger.getInstance().displaySyncNotification(getContext());
@@ -1221,8 +1235,54 @@ public class ConsultationCommandFragment extends Fragment implements SellectClie
     public void onDeleteOrderByIdSuccess() {
 
 
-        popUp.hideDialog("dataload");
-        navController.popBackStack(R.id.historiqueCoFragment, false);
+        new DeleteAllTask(getContext(), 1, new DeleteAllCallback() {
+            @Override
+            public void onDeleteSucces() {
+                new ArticlesAPI().getArticles(getContext(), new InitArticleTableCallback() {
+                    @Override
+                    public void onArticleCallFailed() {
+
+                    }
+
+                    @Override
+                    public void onArticleCallSuccess() {
+
+                    }
+
+                    @Override
+                    public void getArticlesListCallback(List<Article> articleList) {
+
+                    }
+
+                    @Override
+                    public void onArticleInsertionError() {
+
+                    }
+
+                    @Override
+                    public void onArticleInsertionSuccess() {
+
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                popUp.hideDialog("loadingDialog");
+
+                                navController.popBackStack(R.id.historiqueCoFragment, false);
+                            }
+                        });
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onDelteError(int result) {
+
+            }
+        }).execute();
+
+
 
     }
 

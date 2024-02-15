@@ -1,23 +1,23 @@
 package com.digid.eddokenaCM.Models;
 
 
+import androidx.room.ColumnInfo;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class OrderRequestObject {
 
+    @ColumnInfo(name = "originOrderId")
+    @SerializedName("originOrderId")
+    private long originOrderId;
+
     @SerializedName("orderId")
     private Long orderId;
 
-    // Client reference code (CT_Num)
     @SerializedName("items")
     private List<OrderRequestObjectItem> items;
-
-
-    // TODO: 08/02/2024
-    // liste fel modification dois contenant deux objet objet lowel kima houa avecl orderId nafsou w theni originOrderId
-    // objet theni fih les lignes mta3 les  nouvelles articles ajoutés mais avec le originOrderId meme
 
     @SerializedName("orderDate")
     private String date;
@@ -56,6 +56,14 @@ public class OrderRequestObject {
         this.note = note;
         this.expectedTotalAmount = expectedTotalAmount;
         this.status = status;
+    }
+
+    public long getOriginOrderId() {
+        return originOrderId;
+    }
+
+    public void setOriginOrderId(long originOrderId) {
+        this.originOrderId = originOrderId;
     }
 
     public Long getOrderId() {
@@ -141,7 +149,10 @@ public class OrderRequestObject {
     @Override
     public String toString() {
         return "OrderRequestObject{" +
-                "date='" + date + '\'' +
+                "originOrderId=" + originOrderId +
+                ", orderId=" + orderId +
+                ", items=" + items +
+                ", date='" + date + '\'' +
                 ", ref='" + ref + '\'' +
                 ", clientId=" + clientId +
                 ", shopId=" + shopId +
@@ -149,7 +160,6 @@ public class OrderRequestObject {
                 ", expectedTotalAmount=" + expectedTotalAmount +
                 ", status='" + status + '\'' +
                 ", extra=" + extra +
-                ", items=" + items +
                 '}';
     }
 }

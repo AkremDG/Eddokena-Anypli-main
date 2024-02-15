@@ -74,8 +74,13 @@ public class CommendeAPI {
                             if(response != null){
                                 try {
 
-                                    callback.addCmdSuccess(response.body().get(0).getExtra().getIdTab(),
-                                            response.body().get(0).getRef());
+                                    if(response.body().get(0).getExtra().getIdTab()!=null){
+                                        callback.addCmdSuccess(response.body().get(0).getExtra().getIdTab(),
+                                                response.body().get(0).getRef());
+                                    }else
+                                    {
+                                        Log.i("TAG", "onResponse: ");
+                                    }
 
                                 } catch (Exception e){
                                     Log.e("rrrrrrrr", "onResponse: ",e );
@@ -99,7 +104,6 @@ public class CommendeAPI {
 
 
                 callback.addCmdFailed(t.getMessage());
-
 
             }
         });
