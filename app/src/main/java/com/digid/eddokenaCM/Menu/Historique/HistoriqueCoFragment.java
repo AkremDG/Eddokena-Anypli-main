@@ -281,9 +281,7 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
                 mSwipeRefreshLayout.setRefreshing(true);
                 if (Utilities.getInstance().isOnline(getContext())) {
                     loadingDone = "";
-                    new HistoriqueAPI().getCmdEntete(getContext(), SessionManager.getInstance().getToken(getContext()), HistoriqueCoFragment.this, HistoriqueCoFragment.this,HistoriqueCoFragment.this);
-
-                   // new DeleteAllTask(getContext(),1, HistoriqueCoFragment.this).execute();
+                    new DeleteAllTask(getContext(),1, HistoriqueCoFragment.this).execute();
 
                 } else {
                     popUp.showDialog("connectionerror");
@@ -1374,9 +1372,7 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
     @Override
     public void addCmdSuccess(Long idCmdLocal, String doPiece) {
 
-
-
-        //new DeleteOrderByIdTask(getContext(),this,idCmdLocal).execute();
+        new DeleteOrderByIdTask(getContext(),this,idCmdLocal).execute();
 
     }
 

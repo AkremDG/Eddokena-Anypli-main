@@ -1912,10 +1912,15 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
 
         } else {
 
-            Toast.makeText(getContext(), "sUCCESSSS ELSE", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Check Back Office ", Toast.LENGTH_SHORT).show();
+
 
 
             new DeleteOrderByIdTask(getContext(),this,idCmdLocal).execute();
+
+
+
+
 
 
             /* old charfa
@@ -1986,7 +1991,6 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
         if(order.getStatus().equals("new")&&order.getIdBo()!=null){
 
 
-
             if (arguments != null && arguments.containsKey("FragmentId")) {
 
                 if (fragmentId.equals("ConsultationCommandFragment")) {
@@ -2030,10 +2034,10 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                         listAA.add(new OrderRequestObjectItem(itemX.getArticleId(), listQteE,PuU));
                     }
 
-                    selectedFirstOrderRequestObject.setOriginOrderId(null);
+                  selectedFirstOrderRequestObject.setOriginOrderId(null);
 
                     selectedFirstOrderRequestObject.setItems(listAA);
-
+                    selectedFirstOrderRequestObject.setStatus("confirmed");
                     selectedFirstOrderRequestObject.setExpectedTotalAmount(null);// done
 
                   //  new InsertAllEnteteLignesTask(getContext(), firstSelectedOrder, CMDArticleCoFragment.this).execute();
@@ -2066,14 +2070,12 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                                         editModelArrayList.get(entry.getValue().getId()).getSelectedQte(), editModelArrayList.get(entry.getValue().getId()).getSelectedTotalPrice()));
                             }
 
-
-
-
                             order.setStatus("confirmed");
 
                             if (order.getIdBo() != null)
                                 selectedSecondOrderRequestObject = new OrderRequestObject(
                                         secondSelectedOrder.getDoDate(),
+                                       //try later order.getOriginOrderId(),
                                         secondSelectedOrder.getIdBo().longValue(),
                                         secondSelectedOrder.getClientId(),
                                         secondSelectedOrder.getClient().getShopId(),
@@ -2121,6 +2123,8 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
                             List<OrderRequestObject> orderRequestObjects = new ArrayList<>();
                             orderRequestObjects.clear();
 
+
+                            selectedSecondOrderRequestObject.setStatus("confirmed");
                             selectedSecondOrderRequestObject.setOriginOrderId(order.getOriginOrderId());
 
                             orderRequestObjects.add(selectedFirstOrderRequestObject);
@@ -2148,6 +2152,7 @@ public class CMDArticleCoFragment extends Fragment implements ClearMemory, Selec
             Toast.makeText(getContext(), "SECOND ", Toast.LENGTH_SHORT).show();
             float totalPrix = 0;
             i = 0;
+
             selectedOrder = order;
             selectedCmdLignesList.clear();
             if (arguments != null && arguments.containsKey("FragmentId")) {
