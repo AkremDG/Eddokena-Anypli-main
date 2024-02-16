@@ -11,7 +11,7 @@ public class OrderRequestObject {
 
     @ColumnInfo(name = "originOrderId")
     @SerializedName("originOrderId")
-    private long originOrderId;
+    private Long originOrderId;
 
     @SerializedName("orderId")
     private Long orderId;
@@ -62,7 +62,7 @@ public class OrderRequestObject {
         return originOrderId;
     }
 
-    public void setOriginOrderId(long originOrderId) {
+    public void setOriginOrderId(Long originOrderId) {
         this.originOrderId = originOrderId;
     }
 

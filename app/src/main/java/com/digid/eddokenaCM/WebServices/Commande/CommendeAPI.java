@@ -83,7 +83,8 @@ public class CommendeAPI {
                                     }
 
                                 } catch (Exception e){
-                                    Log.e("rrrrrrrr", "onResponse: ",e );
+
+                                    Log.i("CAUSEEEEcmd", response.errorBody().toString());
                                     callback.addCmdFailed(response.toString());
 
                                 }
@@ -92,9 +93,10 @@ public class CommendeAPI {
                             Log.i("addFacture Exception",e.getMessage());
                         }
                     } else {
+
+                        Log.i("CAUSEEEEcmd", response.errorBody().toString());
                         callback.addCmdFailed(response.toString());
 
-                        Log.i("rrrrrrrr", "onResponse: ");
                     }
             }
 

@@ -281,8 +281,9 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
                 mSwipeRefreshLayout.setRefreshing(true);
                 if (Utilities.getInstance().isOnline(getContext())) {
                     loadingDone = "";
+                    new HistoriqueAPI().getCmdEntete(getContext(), SessionManager.getInstance().getToken(getContext()), HistoriqueCoFragment.this, HistoriqueCoFragment.this,HistoriqueCoFragment.this);
 
-                    new DeleteAllTask(getContext(),1, HistoriqueCoFragment.this).execute();
+                   // new DeleteAllTask(getContext(),1, HistoriqueCoFragment.this).execute();
 
                 } else {
                     popUp.showDialog("connectionerror");
@@ -1374,7 +1375,8 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
     public void addCmdSuccess(Long idCmdLocal, String doPiece) {
 
 
-        new DeleteOrderByIdTask(getContext(),this,idCmdLocal).execute();
+
+        //new DeleteOrderByIdTask(getContext(),this,idCmdLocal).execute();
 
     }
 
@@ -1382,6 +1384,13 @@ public class HistoriqueCoFragment extends Fragment implements ClearMemory, Delet
     public void addCmdFailed(String error) {
         Log.d("DeleteTaskFailure",error);
         popUp.hideDialog("loadingDialog");
+        try {
+            popUp.hideDialog("dataload");
+
+        }catch (Exception E){
+            Log.i("e", "msg: ");
+        }
+
         Toast.makeText(getContext(), "Veuillez Synchroniser et réessayer !", Toast.LENGTH_LONG).show();
     }
 

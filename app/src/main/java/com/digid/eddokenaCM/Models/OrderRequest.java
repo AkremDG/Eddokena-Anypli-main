@@ -23,4 +23,11 @@ public class OrderRequest {
     public void setOrderRequestObjects(List<OrderRequestObject> orderRequestObjects) {
         this.orderRequestObjects = orderRequestObjects;
     }
+
+    @Override
+    public String toString() {
+        return "OrderRequest{" +
+                "orderRequestObjects=" + orderRequestObjects +
+                '}';
+    }
 }
