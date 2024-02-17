@@ -75,11 +75,8 @@ public interface FArticleDAO {
     @Query("SELECT * FROM ArticleStock WHERE warehouseId=:warehouseId AND idArticle=:articleId ")
     ArticleStock geArticleStocks(long warehouseId, long articleId);
 
-
-
     @Query("SELECT * FROM ArticleStock WHERE warehouseId  in (:warehouseIdList) AND idArticle=:articleId ")
    List<ArticleStock>  geArticleStocksList(List<Long> warehouseIdList, long articleId);
-
 
     @Query("SELECT warehouseId from ClientScope where catalogId=:categoryId and clientId=:clientId")
     long getWarehouseIdByCategory(long categoryId, long clientId);

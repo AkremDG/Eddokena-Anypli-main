@@ -38,6 +38,8 @@ public interface FComptetDAO {
     @Query("SELECT * FROM Client")
     List<Client> findAll();
 
+    @Query("DELETE FROM ClientScope")
+    int deleteAllClientScope();
 
     @Query("SELECT * FROM ClientScope WHERE clientId=:id")
     List<ClientScope> findAllScopes(long id);

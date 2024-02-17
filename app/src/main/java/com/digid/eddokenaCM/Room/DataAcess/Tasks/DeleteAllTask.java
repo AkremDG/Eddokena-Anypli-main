@@ -35,6 +35,9 @@ public class DeleteAllTask extends AsyncTask<Void, Void, Integer> {
         //Newwwwwwwwwwwwwwwwwwwwwwwwwwwwww for action==0
         int resultArticleStockLogin = -1;
 
+        //NEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW PLEASE CHECK WHEN TESTING
+        int resultClientScope = -1;
+
         if (action==0){
 
             try {
@@ -45,11 +48,12 @@ public class DeleteAllTask extends AsyncTask<Void, Void, Integer> {
                 resultCat = MyDB.getInstance(context).fCatalogueDAO().deleteAll();
                 resultCon = MyDB.getInstance(context).conditionDao().deleteAll();
                 resultArticleStockLogin = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlesStock();
-                return resultArt+resultClt+resultCat+resultCon+resultArtPcs+resultArtPrice+resultArticleStockLogin;
+                resultClientScope = MyDB.getInstance(context).fComptetDAO().deleteAllClientScope();
+
+                return resultArt+resultClt+resultCat+resultCon+resultArtPcs+resultArtPrice+resultArticleStockLogin+resultClientScope;
             }catch (Exception e){
                 return null;
             }
-
 
 
         } else if (action==1){
@@ -60,8 +64,9 @@ public class DeleteAllTask extends AsyncTask<Void, Void, Integer> {
                 resultLig = MyDB.getInstance(context).fCmdLigneDAO().deleteAll();
                 resultArticleStock = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlesStock();
                 resultArticle = MyDB.getInstance(context).fAritcleDAO().deleteAll();
+                resultClientScope = MyDB.getInstance(context).fComptetDAO().deleteAllClientScope();
 
-                return resultEnt + resultLig + resultArticleStock + resultArticle;
+                return resultEnt + resultLig + resultArticleStock + resultArticle +resultClientScope;
             }catch (Exception e){
                 return null;
             }
@@ -77,8 +82,9 @@ public class DeleteAllTask extends AsyncTask<Void, Void, Integer> {
                 resultCat = MyDB.getInstance(context).fCatalogueDAO().deleteAll();
                 resultCon = MyDB.getInstance(context).conditionDao().deleteAll();
                 resultArticleStockSynch = MyDB.getInstance(context).fAritcleDAO().deleteAllArticlesStock();
+                resultClientScope = MyDB.getInstance(context).fComptetDAO().deleteAllClientScope();
 
-                return resultArt+resultClt+resultCat+resultCon+resultArtPrice+resultArtPcs+resultArticleStockSynch;
+                return resultArt+resultClt+resultCat+resultCon+resultArtPrice+resultArtPcs+resultArticleStockSynch+resultClientScope;
             }catch (Exception e){
                 return null;
             }
